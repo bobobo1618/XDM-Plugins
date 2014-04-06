@@ -26,9 +26,7 @@ def findSize(desc):
 class Nyaa(Indexer):
     version = '0.1'
     identifier = 'com.github.bobobo1618.nyaa'
-    types = 'de.lad1337.torrent'
-
-    addMediaTypeOptions = 'runFor'
+    types = ['de.lad1337.torrent']
 
     _config = {}
     config_meta = {
@@ -36,9 +34,7 @@ class Nyaa(Indexer):
     }
 
     def searchForElement(self, element):
-        if "anime" not in element.manager.identifier:
-            return []
-        
+        #import ipdb; ipdb.set_trace()
         payload = {
             'page':'rss',
             'cats':'1_37',
@@ -54,7 +50,7 @@ class Nyaa(Indexer):
             log('Nyaa search for term %s : %s' % (term, r.url))
             
             try:
-                xml = ET.fromstring(r.text.encode("utf-8"))
+                xml = etree.fromstring(r.text.encode("utf-8"))
                 items = xml.findall("channel/item")
             except:
                 log.error('Error loading nyaa.')

@@ -6,6 +6,8 @@ import xml.etree.ElementTree as etree
 import requests
 import re
 
+from datetime import datetime
+
 class TVDB(Provider):
     version = '0.1'
     identifier = 'com.github.bobobo1618.tvdb'
@@ -35,17 +37,19 @@ class TVDB(Provider):
 
         self.progress.total = len(shows)
         for show in shows:
-            newElement = self.getElement(show['seriesid'], new_root=root, lang=show['language'])
+            newElement = self._getElement(show['seriesid'], new_root=root, lang=show['language'])
             self.progress.addItem()
 
         return root
 
-        
-    def getElement(self, series_id, element=None, new_root=None, lang='en'):
+    def getElement(self, *args, **kwargs):
+        return self._getElement(*args, **kwargs)
+
+    def _getElement(self, series_id, element=None, new_root=None, lang='en'):
+        series_id = str(series_id)
         mt = MediaType.get(MediaType.identifier == 'de.lad1337.tv')
         mtm = mt.manager
-        root = new_root or mtm.getFakeRoot(term)
-        series_id = str(series_id)
+        root = new_root or mtm.getFakeRoot(series_id)
 
         t = tvdb_api.Tvdb(banners=True, apikey=self._config.get('apikey') or None)
         t._getShowData(series_id, lang)
@@ -74,7 +78,9 @@ class TVDB(Provider):
 
         show.setField("airs", s['airs_dayofweek'] + ' ' + s['airs_time'])
 
-        for (x, season) in show.items():
+        show.saveTemp()
+
+        for (x, season) in s.items():
             newSeason = Element()
             newSeason.mediaType = mt
             newSeason.parent = show
@@ -82,23 +88,26 @@ class TVDB(Provider):
 
             newSeason.setField('number', x, self._tag)
 
+            newSeason.saveTemp()
+
+
+
             for (y, episode) in season.items():
                 newEpisode = Element()
                 newEpisode.mediaType = mt
                 newEpisode.parent = newSeason
                 newEpisode.type = 'Episode'
 
+                newEpisode.setField("id", int(episode['id']), self._tag)
                 newEpisode.setField("title", episode['episodename'], self._tag)
-                newEpisode.setField("airdate", episode['firstaired'], self._tag)
+                newEpisode.setField("airdate", datetime.strptime(episode['firstaired'], '%Y-%m-%d'), self._tag)
                 newEpisode.setField("season", x, self._tag)
                 newEpisode.setField("number", y, self._tag)
                 newEpisode.setField("overview", episode['overview'], self._tag)
 
                 newEpisode.saveTemp()
 
-            newSeason.saveTemp()
-
-        show.saveTemp()
+        return show
 
 
 
