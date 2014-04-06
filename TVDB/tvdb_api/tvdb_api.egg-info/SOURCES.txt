@@ -1,0 +1,16 @@
+MANIFEST.in
+Rakefile
+UNLICENSE
+readme.md
+setup.py
+tvdb_api.py
+tvdb_cache.py
+tvdb_exceptions.py
+tvdb_ui.py
+tests/gprof2dot.py
+tests/runtests.py
+tests/test_tvdb_api.py
+tvdb_api.egg-info/PKG-INFO
+tvdb_api.egg-info/SOURCES.txt
+tvdb_api.egg-info/dependency_links.txt
+tvdb_api.egg-info/top_level.txt

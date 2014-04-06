@@ -1,0 +1,27 @@
+Metadata-Version: 1.1
+Name: tvdb_api
+Version: 1.9
+Summary: Interface to thetvdb.com
+Home-page: http://github.com/dbr/tvdb_api/tree/master
+Author: dbr/Ben
+Author-email: UNKNOWN
+License: unlicense
+Description: An easy to use API interface to TheTVDB.com
+        Basic usage is:
+        
+        >>> import tvdb_api
+        >>> t = tvdb_api.Tvdb()
+        >>> ep = t['My Name Is Earl'][1][22]
+        >>> ep
+        <Episode 01x22 - Stole a Badge>
+        >>> ep['episodename']
+        u'Stole a Badge'
+        
+Platform: UNKNOWN
+Classifier: Intended Audience :: Developers
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Multimedia
+Classifier: Topic :: Utilities
+Classifier: Topic :: Software Development :: Libraries :: Python Modules

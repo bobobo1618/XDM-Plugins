@@ -17,6 +17,22 @@
                 ], 
                 "download_url": "https://github.com/bobobo1618/XDM-Plugins/archive/master.zip"
             }
+        ], 
+        "com.github.bobobo1618.tvdb": [
+            {
+                "major_version": 0, 
+                "minor_version": 1, 
+                "name": "TVDB", 
+                "type": "Provider", 
+                "format": "zip", 
+                "desc": "TheTVDB provider.", 
+                "xdm_version": [
+                    0, 
+                    5, 
+                    18
+                ], 
+                "download_url": "https://github.com/bobobo1618/XDM-Plugins/archive/master.zip"
+            }
         ]
     }
 }
