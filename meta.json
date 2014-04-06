@@ -1,0 +1,22 @@
+{
+    "name": "bobobo1618's XDM repo", 
+    "info_url": "https://github.com/bobobo1618/XDM-Plugins", 
+    "plugins": {
+        "com.github.bobobo1618.nyaa": [
+            {
+                "major_version": 0, 
+                "minor_version": 1, 
+                "name": "Nyaa", 
+                "type": "Indexer", 
+                "format": "zip", 
+                "desc": null, 
+                "xdm_version": [
+                    0, 
+                    5, 
+                    18
+                ], 
+                "download_url": "https://github.com/bobobo1618/XDM-Plugins/archive/master.zip"
+            }
+        ]
+    }
+}
